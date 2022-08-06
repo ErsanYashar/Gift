@@ -1,0 +1,25 @@
+﻿@using myPosGift.Infrastructure.Data.DateModels
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+    
+ <div class="collapse navbar-collapse" id="navbar">
+
+    @if (!this.User.IsInRole("Admin"))
+    {
+        
+    }
+    else
+    {
+        <ul class="nav navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="Register"><i class="fas fa-user-plus"></i>Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignIn"><i class="fas fa-user"></i> Sign In</a>
+            </li>
+        </ul>
+    }   
+ </div>
