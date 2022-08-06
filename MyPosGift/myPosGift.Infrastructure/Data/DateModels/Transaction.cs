@@ -9,10 +9,7 @@ namespace myPosGift.Infrastructure.Data.DateModels
         public int Id { get; set; }
 
         [Column(TypeName = "decimal(5,2)")]
-        public decimal Amount { get; init; }
-
-        [MaxLength(DescriptionMaxLength)]
-        public string Description { get; set; }
+        public decimal Amount { get; set; }
 
         [Required]
         [MaxLength(NameMaxLength)]
@@ -23,7 +20,10 @@ namespace myPosGift.Infrastructure.Data.DateModels
         public string SenderName { get; set; }
 
         [Required]
-        public DateTime Date { get; init; }
+        public DateTime Date { get; set; }
+
+        [MaxLength(DescriptionMaxLength)]
+        public string Description { get; set; }
 
         public virtual ICollection<User> Users { get; set; } = new HashSet<User>();    
 

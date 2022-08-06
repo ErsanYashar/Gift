@@ -1,9 +1,18 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using myPosGift.Infrastructure.Data;
 using myPosGift.Infrastructure.Data.DateModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -14,7 +23,13 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars = 0;
     options.User.RequireUniqueEmail = false;
-});
+})
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddControllersWithViews();
+
+
+
 
 var app = builder.Build();
 

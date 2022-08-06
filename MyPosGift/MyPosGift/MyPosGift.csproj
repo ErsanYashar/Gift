@@ -15,11 +15,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\myPosGift.Core\myPosGift.Core.csproj" />
-    <ProjectReference Include="..\myPosGift.Infrastructure\myPosGift.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
