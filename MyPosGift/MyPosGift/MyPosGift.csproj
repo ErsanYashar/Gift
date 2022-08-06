@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\myPosGift.Core\myPosGift.Core.csproj" />
+    <ProjectReference Include="..\myPosGift.Infrastructure\myPosGift.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,5 +13,8 @@ namespace myPosGift.Infrastructure.Data.DateModels
         [ForeignKey(nameof(TransactionId))]
         public virtual Transaction Transaction { get; set; }
 
+        [Column(TypeName = "decimal(5,2)")]
+        public decimal Credits { get; set; }
+
     }
 }
