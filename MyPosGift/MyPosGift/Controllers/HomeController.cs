@@ -15,6 +15,11 @@ namespace MyPosGift.Controllers
 
         public IActionResult Index()
         {
+            if (this.User.IsInRole("Admin"))
+            {
+                return this.RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+
             return View();
         }
 

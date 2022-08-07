@@ -6,6 +6,7 @@ using myPosGift.Core.Services.Interfaces;
 using myPosGift.Core.ViewModel.User;
 using myPosGift.Infrastructure.Data;
 using myPosGift.Infrastructure.Data.DateModels;
+using X.PagedList;
 
 namespace MyPosGift.Areas.Identity.Controllers
 {
@@ -118,6 +119,19 @@ namespace MyPosGift.Areas.Identity.Controllers
         {
             await this.signInManager.SignOutAsync();
             return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult All(int? page)
+        {
+            var users = this.usersService.GetAllUsers();
+
+            var pageNumber = page ?? 1;
+            var usersPage = users.ToPagedList(pageNumber, 15);
+
+            this.ViewData["Users"] = usersPage;
+
+            return this.View();
         }
     }
 }
