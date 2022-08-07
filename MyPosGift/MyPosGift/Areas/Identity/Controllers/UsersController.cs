@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using myPosGift.Core.Services.Constants;
 using myPosGift.Core.Services.Interfaces;
@@ -109,6 +110,13 @@ namespace MyPosGift.Areas.Identity.Controllers
                 return this.View(model);
             }
 
+            return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> SignOut()
+        {
+            await this.signInManager.SignOutAsync();
             return this.RedirectToAction("Index", "Home", new { area = "" });
         }
     }
