@@ -14,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<ITransaction, TransactionService>();
+
 
 
 builder.Services.AddDefaultIdentity<User>(options =>
