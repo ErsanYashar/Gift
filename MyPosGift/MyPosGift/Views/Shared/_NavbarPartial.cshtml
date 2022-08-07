@@ -1,22 +1,74 @@
-﻿@using myPosGift.Infrastructure.Data.DateModels
+﻿@using myPosGift.Core.Services.Interfaces
+@using myPosGift.Infrastructure.Data.DateModels
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject IUsersService users
+
+@{
+    string userCredits = "";
+
+    if (User.Identity.IsAuthenticated)
+    {
+        userCredits = this.users
+            .GetUserById(UserManager.GetUserId(User))
+            .Credits.ToString("F2");
+    }
+}
 
     
  <div class="collapse navbar-collapse" id="navbar">
 
-   @* @if (!this.User.IsInRole("Admin"))
+     @if (SignInManager.IsSignedIn(User))
     {
-        
+        if (this.User.IsInRole("Admin"))
+        {
+           <ul class="nav navbar-nav text-right">              
+              <li class="nav-link">
+                <a asp-area="" asp-controller="Users" asp-action="Dashboard" class="nav-link"><i class=""></i> Dashboard</a>
+             </li>
+             <li class="nav-link">
+               <a asp-area="" asp-controller="Users" asp-action="Users" class="nav-link"><i class=""></i> Users</a>
+            </li>
+         </ul>
+         <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                   <a class="nav-link">@userCredits Credits</a> 
+                    @*<a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>*@
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>
+                </li>
+            <li class="nav-item">
+               <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
+           </li>
+         </ul> 
+        }
+        else
+        {
+            <ul class="nav navbar-nav text-right">              
+                <li class="nav-link">
+                    <a asp-area="" asp-controller="Users" asp-action="Dashboard" class="nav-link"><i class=""></i> Dashboard</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ms-auto">
+                <li class="nav-item">
+                   <a class="nav-link">@userCredits Credits</a> 
+                    @*<a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="UpdateAccount"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>*@
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignOut"><i class="fas fa-user-slash"></i> Sign Out</a>
+                </li>
+            </ul>
+        }
     }
     else
     {
-      
-    }  *@
-    
-      <ul class="nav navbar-nav ms-auto">
+        <ul class="nav navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="Register"><i class="fas fa-user-plus"></i>Register</a>
             </li>
@@ -24,4 +76,5 @@
                 <a class="nav-link" asp-area="Identity" asp-controller="Users" asp-action="SignIn"><i class="fas fa-user"></i> Sign In</a>
             </li>
         </ul>
+    }   
  </div>

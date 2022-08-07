@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using myPosGift.Core.Services;
+using myPosGift.Core.Services.Interfaces;
 using myPosGift.Infrastructure.Data;
 using myPosGift.Infrastructure.Data.DateModels;
 
@@ -13,6 +15,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddTransient<IUsersService, UsersService>();
 
 
 builder.Services.AddDefaultIdentity<User>(options =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using myPosGift.Core.Services.Constants;
+using myPosGift.Core.Services.Interfaces;
 using myPosGift.Core.ViewModel.User;
 using myPosGift.Infrastructure.Data;
 using myPosGift.Infrastructure.Data.DateModels;
@@ -14,13 +15,15 @@ namespace MyPosGift.Areas.Identity.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ApplicationDbContext dbContex;
+        private readonly IUsersService usersService;
 
-        public UsersController(UserManager<User> userManager, ApplicationDbContext dbContex, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+        public UsersController(UserManager<User> userManager, ApplicationDbContext dbContex, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager, IUsersService usersService)
         {
             this.userManager = userManager;
             this.dbContex = dbContex;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
+            this.usersService = usersService;
         }
 
         public IActionResult Register()
@@ -46,7 +49,7 @@ namespace MyPosGift.Areas.Identity.Controllers
         {
 
             var user = new User
-            {   
+            {
                 UserName = model.Username,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -54,6 +57,12 @@ namespace MyPosGift.Areas.Identity.Controllers
                 PhoneNumber = model.PhoneNumber,
             };
 
+            var UserEx = usersService.GetUserById(user.Id);
+
+            if (UserEx == null)
+            {
+                user.Credits = 100;
+            }
 
             var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -79,5 +88,28 @@ namespace MyPosGift.Areas.Identity.Controllers
             return this.RedirectToAction("Index", "Home", new { area = "" });
         }
 
+        public IActionResult SignIn()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SignInViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var signIn = await this.signInManager.PasswordSignInAsync(model.Username, model.Password, true, true);
+
+            if (!signIn.Succeeded)
+            {
+                this.ViewData["Error"] = ConstCore.UserOrPasInv;
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
     }
 }
