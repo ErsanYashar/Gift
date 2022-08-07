@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using myPosGift.Core.ViewModel.Transaction;
 
 namespace myPosGift.Core.Services.Interfaces
 {
     public interface ITransaction 
     {
+        IList<TransactionViewModel> GetAllTransaction();
     }
 }

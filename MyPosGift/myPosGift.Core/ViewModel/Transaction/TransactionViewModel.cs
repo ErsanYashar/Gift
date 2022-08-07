@@ -2,9 +2,10 @@
 {
     public class TransactionViewModel
     {
-        public string PhoneNumber { get; set; }
         public decimal Amount { get; set; }
-        public string Description { get; set; }
+        public string RecipientName { get; set; }
+        public string SenderName { get; set; }
         public DateTime Date { get; set; }
+        public string Description { get; set; }
     }
 }
