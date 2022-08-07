@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using myPosGift.Infrastructure.Data.DateModels;
 
 namespace myPosGift.Core.Services.Interfaces
 {
-    internal class IUsersService
+    public interface IUsersService
     {
+        User GetUserById(string userId);
     }
 }

@@ -47,7 +47,6 @@ namespace MyPosGift.Areas.Identity.Controllers
 
             var user = new User
             {   
-
                 UserName = model.Username,
                 FirstName = model.FirstName,
                 LastName = model.LastName,

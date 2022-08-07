@@ -10,8 +10,4 @@
     <ProjectReference Include="..\myPosGift.Infrastructure\myPosGift.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-  </ItemGroup>
-
 </Project>
