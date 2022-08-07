@@ -25,8 +25,6 @@ namespace myPosGift.Infrastructure.Data.DateModels
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 
-        public virtual ICollection<User> Users { get; set; } = new HashSet<User>();    
-
 
     }
 }
