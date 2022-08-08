@@ -8,9 +8,23 @@ namespace myPosGift.Core.Services
 {
     public class TransactionService : BaseService, ITransaction
     {
-        public TransactionService(UserManager<User> userManager, ApplicationDbContext context)
+        private readonly IUsersService users;
+        public TransactionService(UserManager<User> userManager, ApplicationDbContext context, IUsersService users)
             : base(userManager, context)
         {
+            this.users = users;
+        }
+
+        public IList<TransactionViewModel> AllTransacationsUser(string Id)
+        {
+            var currentUserFirstName = this.users.GetUserById(Id).FirstName;
+
+            var transactions = GetAllTransaction()
+                .Where(t => t.SenderName == currentUserFirstName ||
+                    t.RecipientName == currentUserFirstName)
+                .ToList();
+            return transactions;
+
         }
 
         public IList<TransactionViewModel> GetAllTransaction()
