@@ -1,4 +1,5 @@
 ﻿using myPosGift.Core.ViewModel.Transaction;
+using System.Transactions;
 
 namespace myPosGift.Core.Services.Interfaces
 {
@@ -6,6 +7,7 @@ namespace myPosGift.Core.Services.Interfaces
     {
         IList<TransactionViewModel> GetAllTransaction();
         IList<TransactionViewModel> AllTransacationsUser(string Id);
+        bool Send(TransactionGiftModel transaction, string Id);
 
     }
 }

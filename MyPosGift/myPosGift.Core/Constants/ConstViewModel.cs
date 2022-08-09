@@ -26,5 +26,10 @@
         public const int MaxLastNameLength = 30;
         public const string LastNameMinLengthErrorMessage = $"The LastName must be at least 2 characters long!";
         public const string LastNameMaxLengthErrorMessage = $"LastName should not be longer than 30 characters!";
+
+        public const int MinDescLength = 5;
+        public const int MaxDescLength = 100;
+        public const string DescMinLengthErrorMessage = $"Description must be at least 5 characters long!";
+        public const string DescMaxLengthErrorMessage = $"Description should not be longer than 100 characters!";
     }
 }

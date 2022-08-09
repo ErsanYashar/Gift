@@ -37,5 +37,14 @@ namespace myPosGift.Core.Services
 
             return user;
         }
+
+        public User GetUserPhoneNumber(string phoneNumb)
+        {
+            User user = this.Context.Users
+                .FirstOrDefault(x => x.PhoneNumber == phoneNumb);
+
+            return user;
+
+        }
     }
 }

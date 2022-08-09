@@ -42,5 +42,36 @@ namespace myPosGift.Core.Services
 
             return transaction;
         }
+
+        public bool Send(TransactionGiftModel item, string Id)
+        {
+            var user = this.users.GetUserById(Id);
+
+            var recipient = this.users.GetUserPhoneNumber(item.PhoneNumber);
+
+            if (user.Credits < item.Amount || user.PhoneNumber == recipient.PhoneNumber || recipient == null)
+            {
+                return false;
+            }
+
+            recipient.Credits += item.Amount;
+
+            user.Credits -= item.Amount;
+
+            var transaction = new Transaction
+            {
+                Amount = item.Amount,
+                Description = item.Description,
+                RecipientName = recipient.FirstName,
+                SenderName = user.FirstName,
+                Date = DateTime.UtcNow.ToLocalTime(),
+            };
+
+            this.Context.Add(transaction);
+
+            this.Context.SaveChanges();
+
+            return true;
+        }
     }
 }

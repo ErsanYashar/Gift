@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using myPosGift.Core.Services.Interfaces;
+using myPosGift.Core.ViewModel.Transaction;
 using myPosGift.Infrastructure.Data.DateModels;
 using System.Security.Claims;
 using X.PagedList;
@@ -40,5 +41,25 @@ namespace MyPosGift.Controllers
 
             return this.View(transactionPage);
         }
+
+
+        [Authorize]
+        public IActionResult SentGift(TransactionGiftModel item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var sent = this.transactionService.Send(item, userId);
+
+            return this.View();
+        }
+
+
+
+
     }
 }

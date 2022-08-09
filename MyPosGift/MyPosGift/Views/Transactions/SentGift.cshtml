@@ -1,0 +1,73 @@
+﻿@using myPosGift.Core.ViewModel.Transaction
+@model TransactionGiftModel
+
+@{
+    ViewData["Title"] = "SentGift";
+}
+
+
+@if (this.ViewData.ContainsKey("Error"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
+        <strong>@this.ViewData["Error"]</strong>
+    </div>
+}
+@if (this.ViewData.ContainsKey("Message"))
+{
+    <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">
+        <strong>@this.ViewData["Message"]</strong>
+    </div>
+}
+
+<h1 class="text-center text-primary">SentGift</h1>
+
+
+
+<div class="row text-center">
+    <div class="col-md-4 offset-md-4 text-center">
+        <form asp-area="" asp-controller="Transactions" asp-action="SentGift" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="PhoneNumber" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+                    </div>
+                    <input asp-for="Amount" class="form-control" placeholder="Amount" />
+                </div>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-audio-description"></i></span>
+                    </div>
+                    <input asp-for="Description" class="form-control" placeholder="Description" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Sent" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Transactions" asp-action="Dashboard">Back to all</a>
+</div>
+
+

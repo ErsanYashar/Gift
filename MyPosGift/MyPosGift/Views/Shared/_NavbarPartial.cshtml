@@ -9,14 +9,13 @@
 @{
     string userCredits = "";
 
-    if (User.Identity.IsAuthenticated)
+    if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
     {
         userCredits = this.users
             .GetUserById(UserManager.GetUserId(User))
             .Credits.ToString("F2");
     }
 }
-
     
  <div class="collapse navbar-collapse" id="navbar">
 
@@ -24,18 +23,7 @@
     {
         if (this.User.IsInRole("Admin"))
         {
-          @* <ul class="nav navbar-nav text-right">              
-              <li class="nav-link">
-                <a asp-area="" asp-controller="Users" asp-action="Dashboard" class="nav-link"><i class=""></i> Dashboard</a>
-             </li>
-             <li class="nav-link">
-               <a asp-area="" asp-controller="Users" asp-action="Users" class="nav-link"><i class=""></i> Users</a>
-            </li>
-         </ul>*@
          <ul class="nav navbar-nav ms-auto">
-              <li class="nav-item">
-                   <a class="nav-link">@userCredits Credits</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link"><i class="fas fa-user-edit"></i> Hello @UserManager.GetUserName(User)</a>
                 </li>

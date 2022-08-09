@@ -7,5 +7,7 @@ namespace myPosGift.Core.Services.Interfaces
     {
         User GetUserById(string userId);
         IEnumerable<UsersViewModel> GetAllUsers();
+
+        User GetUserPhoneNumber(string phoneNumb);
     }
 }
