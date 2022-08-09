@@ -10,6 +10,7 @@ namespace myPosGift.Core.Services.Constants
     {
         public const string UsernameEror = "Username already exists!";
         public const string UserOrPasInv = "Username or password are invalid!";
+        public const string NotExist = "Not Exist";
 
     }
 }

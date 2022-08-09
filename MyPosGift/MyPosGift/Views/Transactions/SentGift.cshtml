@@ -6,12 +6,6 @@
 }
 
 
-@if (this.ViewData.ContainsKey("Error"))
-{
-    <div class="col-md-6 offset-3 alert alert-dismissible alert-danger text-center">
-        <strong>@this.ViewData["Error"]</strong>
-    </div>
-}
 @if (this.ViewData.ContainsKey("Message"))
 {
     <div class="col-md-6 offset-3 alert alert-dismissible alert-success text-center">

@@ -61,7 +61,7 @@ namespace MyPosGift.Areas.Identity.Controllers
 
             var UserEx = usersService.GetUserById(user.Id);
 
-            if (UserEx == null)
+            if (UserEx == null )
             {
                 user.Credits = 100;
             }

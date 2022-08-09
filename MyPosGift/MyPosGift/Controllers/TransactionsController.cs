@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using myPosGift.Core.Services.Constants;
 using myPosGift.Core.Services.Interfaces;
 using myPosGift.Core.ViewModel.Transaction;
 using myPosGift.Infrastructure.Data.DateModels;
@@ -53,7 +54,13 @@ namespace MyPosGift.Controllers
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var sent = this.transactionService.Send(item, userId);
+           var sent= this.transactionService.Send(item, userId);
+
+            if (!sent)
+            {
+                this.TempData["Message"] = ConstCore.NotExist;
+                return this.RedirectToAction("Invalid", "Home", new { area = "" });
+            }
 
             return this.View();
         }
