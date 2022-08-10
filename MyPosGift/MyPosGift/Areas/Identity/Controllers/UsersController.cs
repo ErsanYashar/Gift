@@ -59,9 +59,9 @@ namespace MyPosGift.Areas.Identity.Controllers
                 PhoneNumber = model.PhoneNumber,
             };
 
-            var UserEx = usersService.GetUserById(user.Id);
+            var userEx = usersService.GetUserById(user.Id);
 
-            if (UserEx == null )
+            if (userEx == null  )
             {
                 user.Credits = 100;
             }
