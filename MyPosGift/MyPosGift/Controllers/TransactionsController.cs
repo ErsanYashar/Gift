@@ -62,11 +62,13 @@ namespace MyPosGift.Controllers
                 return this.RedirectToAction("Invalid", "Home", new { area = "" });
             }
 
+            if (sent)
+            {             
+                return this.RedirectToAction("Dashboard", "Transactions", new { area = "" });
+            }
+
             return this.View();
+
         }
-
-
-
-
     }
 }
